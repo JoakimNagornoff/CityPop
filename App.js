@@ -10,10 +10,6 @@ import React from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
 
-const setScreen = (screen) => {
-  setState({screen: screen})
-}
-
 export class App extends React.Component{
   render(){
       return (
@@ -66,6 +62,8 @@ const style = StyleSheet.create({
     width: 420,
     height: 80,
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#000'
 
   },
   buttonText: {
