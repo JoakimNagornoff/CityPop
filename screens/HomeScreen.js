@@ -4,7 +4,9 @@ import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
 
 
 class HomeScreen extends React.Component{
-   
+  static navigationOptions = {
+    headerShown: false,
+  };
     render(){
         const {navigate} = this.props.navigation;
         return (
