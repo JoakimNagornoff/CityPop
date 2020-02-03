@@ -14,8 +14,6 @@ class CountryScreen extends React.Component{
                 </View>
                 <View style={style.half2}>
                     <TextInput style={style.input}
-                    keyboardType='default'
-                    autoCorrect='false'
                     placeholder='Search a country'>
 
                     </TextInput>
@@ -52,6 +50,9 @@ const style = StyleSheet.create({
     input: {
         borderWidth: 1,
         borderColor: '#000',
+        textAlign: "center",
+        fontSize: 18,
+        
     }
 
 

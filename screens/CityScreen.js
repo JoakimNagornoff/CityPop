@@ -2,8 +2,6 @@ import React from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput} from 'react-native';
 
-
-
 class CityScreen extends React.Component{
     render(){
         return(
@@ -14,7 +12,10 @@ class CityScreen extends React.Component{
 
                 </View>
                 <View style={style.half2}>
-                    <TextInput style={style.input}  placeholder='Search a city'></TextInput>
+                    <TextInput style={style.input}
+                     placeholder='Search a city'>
+
+                    </TextInput>
 
                 </View>
 

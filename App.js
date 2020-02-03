@@ -1,77 +1,23 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
-
 import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
 
-export class App extends React.Component{
-  render(){
-      return (
-        <View style={style.container}>
-          <View style={style.half1}>
-            <Text style={style.title}>CityPop</Text>
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
+import CityScreen from './screens/CityScreen';
+import CountryScreen from './screens/CountryScreen';
+import HomeScreen from './screens/HomeScreen';
 
+const App = createStackNavigator({
+  CityScreen: {screen: CityScreen},
+  CountryScreen: {screen: CountryScreen},
+  HomeScreen: {screen: HomeScreen},
 
-          </View>
-          <View style={style.half2}>
-            <TouchableOpacity style={style.Button}>
-              <Text style={style.buttonText}>SEARCH BY CITY</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={style.Button}>
-              <Text style={style.buttonText}>SEARCH BY COUNTRY</Text>
-            </TouchableOpacity>
-
-
-          </View>
-        </View>
-     
-      )
-  }
+},
+{
+  initialRouteName: 'HomeScreen',
 }
-const style = StyleSheet.create({
- container: {
-   flex: 1,
+);
 
-  },
-  half1: {
-    flex: 1,
-  
-  },
-  half2: {
-    flex: 2,
-  
-  
-  },
-  title:{
-    fontSize: 35,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginTop: 100,
 
-  },
-  Button: {
-    alignItems: "center",
-    backgroundColor: '#DDDDDD',
-    width: 420,
-    height: 80,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#000'
-
-  },
-  buttonText: {
-    fontSize: 22,
-    fontWeight: "bold",
-    textAlign: "center",
-    padding: 20,
-  }
-
-});
-export default App;
+export default createAppContainer(App);
