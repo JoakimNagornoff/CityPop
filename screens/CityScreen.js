@@ -1,12 +1,26 @@
 import React from 'react';
 
-import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput,Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput,Image, ActivityIndicator} from 'react-native';
 
 class CityScreen extends React.Component{
     static navigationOptions ={
         title: 'CityPop',
 
     }
+    consoleMessage=()=>{
+        console.log(this.state.CitySearch);
+    }
+    //Contructor for this state
+    constructor(props){
+        super(props);
+        this.state = {
+            dataSource: null,
+            isLoading: true,
+            CitySearch: ""
+        }
+    }
+    //Metod get api request from textfield
+  
     render(){
         return(
             <View style={style.container}>
@@ -17,14 +31,16 @@ class CityScreen extends React.Component{
                 </View>
                 <View style={style.halfTwo}>
                     <TextInput style={style.input}
-                    placeholder='Enter a city'>
+                    placeholder='Enter a city'
+                    onChangeText={CitySearch => this.setState({CitySearch})}
+                    value={this.state.CitySearch}>
 
                     </TextInput>
-                    <TouchableOpacity style={style.searchButton}>
+                    <TouchableOpacity style={style.searchCityButton}
+                    onPress={this.consoleMessage}>
                         <Image
-                        style={style.searchImg}
-                        source={require('./img/search3.png')}/>
-
+                        source={require('./img/search3.png')}
+                        style={style.searchImg}/>
                     </TouchableOpacity>
                 
                 </View>
@@ -73,7 +89,7 @@ const style = StyleSheet.create({
 
     
     },
-    searchButton: {
+    searchCityButton: {
         marginTop: 20, 
         width: 50,
         height: 50,

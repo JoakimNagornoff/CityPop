@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import CountrySearch from './screens/CountrySearch';
 import CitySearch from './screens/CitySearch';
 
+//create stackNavigator for all screens
 const App = createStackNavigator({
   CityScreen: {screen: CityScreen},
   CountryScreen: {screen: CountryScreen},
@@ -19,6 +20,7 @@ const App = createStackNavigator({
 
 },
 {
+  //Setting home as homeScreen
   initialRouteName: 'HomeScreen',
 }
 );

@@ -27,9 +27,6 @@ class CountryScreen extends React.Component{
                         source={require('./img/search3.png')}/>
 
                     </TouchableOpacity>
-                
-
-
 
                 </View>
 
