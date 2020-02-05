@@ -1,26 +1,35 @@
 import React, {useState}from 'react';
 
-import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput,Image, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, TextInput,Image, ActivityIndicator} from 'react-native';
 
 import geonames from '../src/api/geonames';
 
 
 const CityScreen = () =>{
     const [term, setTerm] = useState('');
-    const [result, setResult] = useState([]);
+    const [results, setResults] = useState('[]');
+    const [username] = useState('weknowit');
+    const [type] = useState('json');
+    const [q] = useState('q');
+    const [maxRow] = useState('1');
+    //const [maxRow] = useState('maxRows=1')
     
         const searchApi= async () => {
-        const respons = await geonames.get('', {
+            try{
+        const respons = await geonames.get('cities', {
             params : {
+                q : term,
                 name_equals : term,
-                cities: term ,
-                orderby : term,
-
-
-
+                maxRows: maxRow,
+                type : type,
+                username : username,
             }
         });
-        setResult(console.log(respons));
+        setResults(console.log(respons));
+        setResults(respons.data.cities);
+    } catch (err){
+
+    }
     };
 
         return(
@@ -42,6 +51,7 @@ const CityScreen = () =>{
                         source={require('./img/search3.png')}
                         style={style.searchImg}/>
                     </TouchableOpacity>
+                    <Text>we have found {results} results </Text>
                 
                 </View>
 
@@ -50,7 +60,7 @@ const CityScreen = () =>{
 
 
         );
-        }
+  };
     
 
 
