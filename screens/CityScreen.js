@@ -1,27 +1,28 @@
-import React from 'react';
+import React, {useState}from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput,Image, ActivityIndicator} from 'react-native';
 
-class CityScreen extends React.Component{
-    static navigationOptions ={
-        title: 'CityPop',
+import geonames from '../src/api/geonames';
 
-    }
-    consoleMessage=()=>{
-        console.log(this.state.CitySearch);
-    }
-    //Contructor for this state
-    constructor(props){
-        super(props);
-        this.state = {
-            dataSource: null,
-            isLoading: true,
-            CitySearch: ""
-        }
-    }
-    //Metod get api request from textfield
-  
-    render(){
+
+const CityScreen = () =>{
+    const [term, setTerm] = useState('');
+    const [result, setResult] = useState([]);
+    
+        const searchApi= async () => {
+        const respons = await geonames.get('', {
+            params : {
+                name_equals : term,
+                cities: term ,
+                orderby : term,
+
+
+
+            }
+        });
+        setResult(console.log(respons));
+    };
+
         return(
             <View style={style.container}>
                 <View style={style.halfOne}>
@@ -32,12 +33,11 @@ class CityScreen extends React.Component{
                 <View style={style.halfTwo}>
                     <TextInput style={style.input}
                     placeholder='Enter a city'
-                    onChangeText={CitySearch => this.setState({CitySearch})}
-                    value={this.state.CitySearch}>
-
+                    term={term}
+                    onChangeText={setTerm}>
                     </TextInput>
                     <TouchableOpacity style={style.searchCityButton}
-                    onPress={this.consoleMessage}>
+                    onPress={searchApi}>
                         <Image
                         source={require('./img/search3.png')}
                         style={style.searchImg}/>
@@ -45,17 +45,15 @@ class CityScreen extends React.Component{
                 
                 </View>
 
-            
-
-
-
             </View>
 
 
 
         );
-    }
-}
+        }
+    
+
+
 const style = StyleSheet.create({
     container: {
         flex: 1,
@@ -103,7 +101,7 @@ const style = StyleSheet.create({
 
 
 
-})
-
-
+});
+  
 export default CityScreen;
+
