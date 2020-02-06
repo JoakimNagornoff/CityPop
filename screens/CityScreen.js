@@ -15,8 +15,6 @@ import geonames from '../src/api/geonames';
 const CityScreen = ({navigation}) => {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState({});
-  const [username] = useState('weknowit');
-  const [type] = useState('json');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,15 +24,13 @@ const CityScreen = ({navigation}) => {
       setIsLoading(true);
       const respons = await geonames.get('cities', {
         params: {
-          //q: term,
           name_equals: term,
           maxRows: 1,
-          type: type,
-          username: username,
+          type: 'json',
+          username: 'weknowit',
         },
       });
       setIsLoading(false);
-      console.log(respons.data.totalResultsCount);
       setResults(respons.data.geonames);
       if (respons.data.geonames.length > 0) {
         navigation.navigate('CityResult', {City: respons.data.geonames[0]});
@@ -42,15 +38,15 @@ const CityScreen = ({navigation}) => {
         setErrorMessage('City dosent exist');
       }
     } catch (e) {
-      console.log(e);
-      setErrorMessage('Something went wrong');
+      setErrorMessage('Something went wrong with the api');
     }
   };
 
   return (
     <View style={style.container}>
       <View style={style.halfOne}>
-        <Text style={style.title}>SEARCH BY CITY</Text>
+        <Text style={style.titleOne}>SEARCH BY</Text>
+        <Text style={style.titleTwo}>CITY</Text>
       </View>
       <View style={style.halfTwo}>
         <TextInput
@@ -58,8 +54,10 @@ const CityScreen = ({navigation}) => {
           placeholder="Enter a city"
           term={term}
           onChangeText={newTerm => setTerm(newTerm)}></TextInput>
-        {errorMessage ? <Text>{errorMessage}</Text> : null}
-        {isLoading ? <Text>Loading....</Text> : null}
+        {errorMessage ? (
+          <Text style={style.errorText}>{errorMessage}</Text>
+        ) : null}
+        {isLoading ? <Text style={style.loadingText}>Loading....</Text> : null}
         <TouchableOpacity style={style.searchCityButton} onPress={searchApi}>
           <Image
             source={require('./img/search3.png')}
@@ -74,6 +72,7 @@ const CityScreen = ({navigation}) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   halfOne: {
     flex: 1,
@@ -81,11 +80,16 @@ const style = StyleSheet.create({
   halfTwo: {
     flex: 2,
   },
-  title: {
-    fontSize: 35,
+  titleOne: {
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 100,
+    marginTop: 60,
+  },
+  titleTwo: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   input: {
     borderWidth: 1,
@@ -107,6 +111,17 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     borderColor: '#000',
+  },
+  loadingText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#F00',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

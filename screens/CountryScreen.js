@@ -20,6 +20,7 @@ const CountryScreen = () => {
 
   const searchCountryApi = async () => {
     try {
+      setErrorMessage('');
       const countryCode = countryLookup.byCountry(term);
       console.log(countryCode);
       //kolla om landet finns? if else
@@ -55,7 +56,8 @@ const CountryScreen = () => {
   return (
     <View style={style.container}>
       <View style={style.half1}>
-        <Text style={style.title}>SEARCH BY COUNTRY</Text>
+        <Text style={style.title}>SEARCH BY</Text>
+        <Text style={style.titletwo}>COUNTRY</Text>
       </View>
       <View style={style.half2}>
         <TextInput
@@ -85,6 +87,7 @@ const CountryScreen = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   half1: {
     flex: 1,
@@ -93,10 +96,15 @@ const style = StyleSheet.create({
     flex: 2,
   },
   title: {
-    fontSize: 35,
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 100,
+    marginTop: 80,
+  },
+  titletwo: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   input: {
     borderWidth: 1,
