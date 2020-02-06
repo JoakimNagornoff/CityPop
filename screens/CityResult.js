@@ -2,11 +2,12 @@ import React from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput} from 'react-native'
 
-const CityResult = ({}) => {
-    
+const CityResult = ({navigation}) => {
+    const City = navigation.getParam('City');
         return (
             <View>
-            <Text> Result</Text>
+            <Text> {City.name}</Text>
+            <Text> {City.population}</Text>
             </View>
 
         );
