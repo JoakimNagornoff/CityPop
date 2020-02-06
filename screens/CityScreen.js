@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, TextInput,Image, ActivityIndicator} from 'react-native';
 
@@ -6,31 +6,38 @@ import geonames from '../src/api/geonames';
 
 
 const CityScreen = () =>{
-    const [term, setTerm] = useState('');
-    const [results, setResults] = useState('[]');
-    const [username] = useState('weknowit');
-    const [type] = useState('json');
-    const [q] = useState('q');
-    const [maxRow] = useState('1');
-    //const [maxRow] = useState('maxRows=1')
+        const [term, setTerm] = useState('');
+        const [results, setResults] = useState([]);
+        const [username] = useState('weknowit');
+        const [type] = useState('json');
+        const [maxRow] = useState('1');
+        const [errorMessage, setErrorMessage] = useState('');
+        const [isLoading] = useState(false);
+        
+            const searchApi= async () => {
+                try{
+            const respons = await geonames.get('cities', {
+                params : {
+                    q : term,
+                    name_equals : term,
+                    maxRows: maxRow,
+                    type : type,
+                    username : username,
+                }
     
-        const searchApi= async () => {
-            try{
-        const respons = await geonames.get('cities', {
-            params : {
-                q : term,
-                name_equals : term,
-                maxRows: maxRow,
-                type : type,
-                username : username,
+            });
+            console.log(respons);
+            setResults(respons.data.city);  
+        } catch (e){
+            setErrorMessage('Something went wrong');
+    
+        };
             }
-        });
-        setResults(console.log(respons));
-        setResults(respons.data.cities);
-    } catch (err){
+            const getApiSearch = () => {
 
-    }
-    };
+            }
+
+
 
         return(
             <View style={style.container}>
@@ -43,8 +50,9 @@ const CityScreen = () =>{
                     <TextInput style={style.input}
                     placeholder='Enter a city'
                     term={term}
-                    onChangeText={setTerm}>
+                    onChangeText={newTerm =>setTerm(newTerm)}>
                     </TextInput>
+                    {errorMessage ? <Text>{errorMessage}</Text> : null}
                     <TouchableOpacity style={style.searchCityButton}
                     onPress={searchApi}>
                         <Image
@@ -52,14 +60,15 @@ const CityScreen = () =>{
                         style={style.searchImg}/>
                     </TouchableOpacity>
                     <Text>we have found {results} results </Text>
-                
+
                 </View>
 
             </View>
 
-
+        
 
         );
+    
   };
     
 
@@ -112,6 +121,7 @@ const style = StyleSheet.create({
 
 
 });
+
   
 export default CityScreen;
 

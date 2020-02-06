@@ -2,20 +2,19 @@ import React from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput} from 'react-native'
 
-class CitySearch extends React.Component {
-    static navigationOptions ={
-        title: 'CityPop',
-
-    }
-    render(){
+const CityResult = ({}) => {
+    
         return (
             <View>
-
+            <Text> Result</Text>
             </View>
 
         );
-    }
+    
 
 
 }
-export default CitySearch;
+const style = StyleSheet.create({
+
+});
+export default CityResult;

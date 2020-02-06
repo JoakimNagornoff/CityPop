@@ -1,14 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Button, TextInput, Image} from 'react-native';
 
+import geonames from '../src/api/geonames';
 
-class CountryScreen extends React.Component{
-    static navigationOptions ={
-        title: 'CityPop',
+const CountryScreen = () =>{
+    const [term, setTerm] = useState('');
+    const [results, setResults] = useState([]);
+    const [username] = useState('weknowit');
+    const [type] = useState('json');
+    const [maxRow] = useState('1');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    }
-    render(){
+        const searchCountryApi = async() => {
+            try {
+                const responsCountry = await geonames.get('country', {
+                    params : {
+                        q : term,
+                        name_equals : term ,
+                        maxRows : maxRow,
+                        type,
+                        username : username,
+                    }
+                });
+                setResults(responsCountry.data.country);
+                console.log(responsCountry);
+            } catch (e){
+                setErrorMessage('Something went wrong');
+            };
+        }
+
+
         return(
             <View style={style.container}>
                 <View style={style.half1}>
@@ -18,10 +40,13 @@ class CountryScreen extends React.Component{
                 </View>
                 <View style={style.half2}>
                     <TextInput style={style.input}
-                    placeholder='Enter a country'>
-
+                    placeholder='Enter a country'
+                    term={term}
+                    onChangeText={newTerm =>setTerm(newTerm)}>
                     </TextInput>
-                    <TouchableOpacity style={style.searchButtonTwo}>
+                    {errorMessage ? <Text>{errorMessage}</Text> : null}
+                    <TouchableOpacity style={style.searchButtonTwo}
+                     onPress={searchCountryApi}>
                         <Image
                         style={style.searchImgage}
                         source={require('./img/search3.png')}/>
@@ -33,10 +58,10 @@ class CountryScreen extends React.Component{
             </View>
 
         );
-    }
+    };
 
 
-}
+
 const style = StyleSheet.create({
     container: {
         flex: 1,
@@ -83,8 +108,7 @@ const style = StyleSheet.create({
     }
 
 
-
-})
-
+    
+});
 
 export default CountryScreen;
