@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  ActivityIndicator,
 } from 'react-native';
 
 import geonames from '../src/api/geonames';
@@ -19,6 +18,8 @@ const CityScreen = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const searchApi = async () => {
+    //api call method
+    //reset setErrorMessage
     try {
       setErrorMessage('');
       setIsLoading(true);
@@ -32,8 +33,9 @@ const CityScreen = ({navigation}) => {
       });
       setIsLoading(false);
       setResults(respons.data.geonames);
+      //if respons is bigger then 0, send data with navigation to CityResult screen
       if (respons.data.geonames.length > 0) {
-        navigation.navigate('CityResult', {City: respons.data.geonames[0]});
+        navigation.navigate('CityResult', {City: respons.data.geonames[0][1]});
       } else {
         setErrorMessage('City dosent exist');
       }

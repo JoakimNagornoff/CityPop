@@ -7,8 +7,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import CityScreen from './screens/CityScreen';
 import CountryScreen from './screens/CountryScreen';
 import HomeScreen from './screens/HomeScreen';
-import CountrySearch from './screens/CountrySearch';
 import CityResult from './screens/CityResult';
+import CountryResult from './screens/CountryResult';
 
 //create stackNavigator for all screens
 const App = createStackNavigator(
@@ -16,7 +16,7 @@ const App = createStackNavigator(
     CityScreen: {screen: CityScreen},
     CountryScreen: {screen: CountryScreen},
     HomeScreen: {screen: HomeScreen},
-    CountrySearch: {screen: CountrySearch},
+    CountryResult: {screen: CountryResult},
     CityResult: {screen: CityResult},
   },
   {

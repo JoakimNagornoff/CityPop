@@ -13,18 +13,23 @@ import {
 
 import geonames from '../src/api/geonames';
 
-const CountryScreen = () => {
+const CountryScreen = ({navigation}) => {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchCountryApi = async () => {
     try {
+      //reset errorMessage
       setErrorMessage('');
+      setIsLoading(true);
+      //Countrycode iso2
       const countryCode = countryLookup.byCountry(term);
       console.log(countryCode);
-      //kolla om landet finns? if else
+      //check if the country code does exist
       if (countryCode) {
+        //api call method
         const responsCountry = await geonames.get('', {
           params: {
             q: term,
@@ -34,6 +39,7 @@ const CountryScreen = () => {
             country: countryCode.iso2,
           },
         });
+        //mapping object
         const data = responsCountry.data.geonames
           .sort((a, b) => b.population - a.population)
           .map(city => ({
@@ -41,10 +47,16 @@ const CountryScreen = () => {
             population: city.population,
             country: city.countryName,
           }));
-
+        setIsLoading(false);
         console.log(data);
         setResults(data);
+        navigation.navigate('CountryResult', {
+          city: responsCountry.data.geonames[1],
+          citytwo: responsCountry.data.geonames[2],
+          citythree: responsCountry.data.geonames[3],
+        });
       } else {
+        setIsLoading(false);
         setErrorMessage('Country dosent exist');
       }
     } catch (e) {
@@ -52,7 +64,6 @@ const CountryScreen = () => {
       setErrorMessage('Something went wrong');
     }
   };
-
   return (
     <View style={style.container}>
       <View style={style.half1}>
@@ -63,9 +74,11 @@ const CountryScreen = () => {
         <TextInput
           style={style.input}
           placeholder="Enter a country"
+          autoCapitalize="words"
           term={term}
           onChangeText={newTerm => setTerm(newTerm)}></TextInput>
         {errorMessage ? <Text>{errorMessage}</Text> : null}
+        {isLoading ? <Text style={style.loadingText}>Loading....</Text> : null}
         <TouchableOpacity
           style={style.searchButtonTwo}
           onPress={searchCountryApi}>
@@ -74,11 +87,6 @@ const CountryScreen = () => {
             source={require('./img/search3.png')}
           />
         </TouchableOpacity>
-        {results.map(city => (
-          <Text>
-            {city.name} {city.population}
-          </Text>
-        ))}
       </View>
     </View>
   );
@@ -99,7 +107,7 @@ const style = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 80,
+    marginTop: 60,
   },
   titletwo: {
     fontSize: 32,

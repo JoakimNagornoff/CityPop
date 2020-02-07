@@ -3,6 +3,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const CityResult = ({navigation}) => {
+  //get data from navigation param 'City'
   const City = navigation.getParam('City');
   return (
     <View style={style.container}>
