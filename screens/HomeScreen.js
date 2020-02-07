@@ -48,12 +48,13 @@ const style = StyleSheet.create({
   },
   Button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    width: 420,
+    backgroundColor: '#fff',
+    width: 382,
     height: 80,
     marginBottom: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#000',
+    marginLeft: 5,
   },
   buttonText: {
     fontSize: 22,

@@ -98,6 +98,8 @@ const style = StyleSheet.create({
     borderColor: '#000',
     textAlign: 'center',
     fontSize: 18,
+    marginRight: 5,
+    marginLeft: 5,
   },
   searchImg: {
     width: 30,

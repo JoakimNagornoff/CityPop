@@ -37,8 +37,10 @@ const CountryScreen = ({navigation}) => {
             type: 'json',
             username: 'weknowit',
             country: countryCode.iso2,
+            cities: 'cities15000',
           },
         });
+        console.log(responsCountry);
         //mapping object
         const data = responsCountry.data.geonames
           .sort((a, b) => b.population - a.population)
@@ -51,9 +53,9 @@ const CountryScreen = ({navigation}) => {
         console.log(data);
         setResults(data);
         navigation.navigate('CountryResult', {
-          city: responsCountry.data.geonames[1],
-          citytwo: responsCountry.data.geonames[2],
-          citythree: responsCountry.data.geonames[3],
+          city: responsCountry.data.geonames[0],
+          citytwo: responsCountry.data.geonames[1],
+          citythree: responsCountry.data.geonames[2],
         });
       } else {
         setIsLoading(false);
@@ -119,6 +121,8 @@ const style = StyleSheet.create({
     borderColor: '#000',
     textAlign: 'center',
     fontSize: 18,
+    marginRight: 5,
+    marginLeft: 5,
   },
   searchImgage: {
     width: 30,
