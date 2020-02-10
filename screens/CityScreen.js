@@ -23,7 +23,7 @@ const CityScreen = ({navigation}) => {
     try {
       setErrorMessage('');
       setIsLoading(true);
-      const respons = await geonames.get('cities', {
+      const respons = await geonames.get('Cities', {
         params: {
           name_equals: term,
           maxRows: 1,
@@ -35,7 +35,7 @@ const CityScreen = ({navigation}) => {
       setResults(respons.data.geonames);
       //if respons is bigger then 0, send data with navigation to CityResult screen
       if (respons.data.geonames.length > 0) {
-        navigation.navigate('CityResult', {City: respons.data.geonames[0][1]});
+        navigation.navigate('CityResult', {city: respons.data.geonames[0]});
       } else {
         setErrorMessage('City dosent exist');
       }
