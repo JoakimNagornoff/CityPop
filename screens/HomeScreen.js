@@ -41,7 +41,7 @@ const style = StyleSheet.create({
     flex: 2,
   },
   title: {
-    fontSize: 35,
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 100,
@@ -51,7 +51,7 @@ const style = StyleSheet.create({
     backgroundColor: '#fff',
     width: 382,
     height: 80,
-    marginBottom: 10,
+    marginBottom: 5,
     borderWidth: 2,
     borderColor: '#000',
     marginLeft: 5,

@@ -31,16 +31,18 @@ const style = StyleSheet.create({
     flex: 2,
   },
   title: {
-    fontSize: 35,
+    fontSize: 34,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 100,
+    marginTop: 80,
   },
   box: {
     borderWidth: 2,
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 5,
+    marginLeft: 5,
   },
   populationText: {
     fontSize: 14,

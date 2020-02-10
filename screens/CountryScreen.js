@@ -49,8 +49,9 @@ const CountryScreen = ({navigation}) => {
             population: city.population,
             country: city.countryName,
           }));
+
+        //sending data to CountryResult
         setIsLoading(false);
-        console.log(data);
         setResults(data);
         navigation.navigate('CountryResult', {
           city: responsCountry.data.geonames[0],
@@ -79,7 +80,9 @@ const CountryScreen = ({navigation}) => {
           autoCapitalize="words"
           term={term}
           onChangeText={newTerm => setTerm(newTerm)}></TextInput>
-        {errorMessage ? <Text>{errorMessage}</Text> : null}
+        {errorMessage ? (
+          <Text style={style.errorText}>{errorMessage}</Text>
+        ) : null}
         {isLoading ? <Text style={style.loadingText}>Loading....</Text> : null}
         <TouchableOpacity
           style={style.searchButtonTwo}
@@ -138,6 +141,17 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     borderColor: '#000',
+  },
+  loadingText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#F00',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

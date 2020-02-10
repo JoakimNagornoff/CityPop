@@ -83,13 +83,13 @@ const style = StyleSheet.create({
     flex: 2,
   },
   titleOne: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 60,
   },
   titleTwo: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
   },

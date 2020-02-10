@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
+import {TouchableOpacity, Image, View} from 'react-native';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -24,9 +24,16 @@ const App = createStackNavigator(
     initialRouteName: 'HomeScreen',
     defaultNavigationOptions: {
       title: 'CityPop',
+      headerBackImage: (
+        <Image
+          source={require('./screens/img/leftarrow.png')}
+          style={{height: 30, width: 30, marginStart: 10}}></Image>
+      ),
+
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+
       headerStyle: {
         backgroundColor: '#fff',
         elevation: 0,
