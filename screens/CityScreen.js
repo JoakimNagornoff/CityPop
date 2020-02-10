@@ -29,6 +29,7 @@ const CityScreen = ({navigation}) => {
           maxRows: 1,
           type: 'json',
           username: 'weknowit',
+          cities: 'cities15000',
         },
       });
       setIsLoading(false);
@@ -40,6 +41,7 @@ const CityScreen = ({navigation}) => {
         setErrorMessage('City dosent exist');
       }
     } catch (e) {
+      //errorMessage with the api call
       setErrorMessage('Something went wrong with the api');
     }
   };
